@@ -1,9 +1,6 @@
 package be.dragon.language.users;
 
 
-
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -12,7 +9,7 @@ import java.util.Date;
 /**
  *
  */
-@Entity(name="USER")
+@Entity(name = "USER")
 public class User {
 
     @Id
@@ -39,7 +36,6 @@ public class User {
     private Date dateofBirth;
 
 
-
     @Lob
     @Column(name = "PROFILE_PIC")
     private byte[] profilePic;
@@ -51,7 +47,7 @@ public class User {
 
     }
 
-    public User(String userName, String password, Date creationTime, Date updatedTime, Date dateofBirth,  byte[] profilePic) {
+    public User(String userName, String password, Date creationTime, Date updatedTime, Date dateofBirth, byte[] profilePic) {
         this.userName = userName;
         this.password = password;
         this.creationTime = creationTime;
@@ -115,7 +111,6 @@ public class User {
     }
 
 
-
     public byte[] getProfilePic() {
         return profilePic;
     }
@@ -147,8 +142,6 @@ public class User {
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
     }
-
-
 
 
     @Override
