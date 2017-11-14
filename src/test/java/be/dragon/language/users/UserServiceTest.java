@@ -29,7 +29,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnAUser() throws Exception {
+    public void shouldReturnAUserByName() throws Exception {
 
         Date date = new Date();
 
@@ -61,6 +61,25 @@ public class UserServiceTest {
         assertThat(userService.findAllUsers(), isA(List.class));
 
     }
+
+
+    @Test
+    public void schouldGetUserById() {
+        Date date = new Date();
+
+        User user = new User("benoit", "password", date, date, date, null);
+
+        given(userRepository.findOne(Long.valueOf(1))).willReturn((user));
+
+        User ret = userService.findById(1);
+
+        assertThat(ret, is(user));
+
+    }
+
+
+
+
 
 }
 
