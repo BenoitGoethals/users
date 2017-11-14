@@ -42,11 +42,29 @@ public class UserControllerTest {
 
         //    assertThat(ret.get(),is(user));
 
-        mockMvc.perform(get("/users/user/"))
+        mockMvc.perform(get("/users/1"))
 
                 .andExpect(status().is2xxSuccessful());
     }
 
+
+    @Test
+    public void shouldReturnUser() throws Exception {
+        Date date = new Date();
+
+        User user = new User("benoit", "password", date, date, date, null);
+
+
+        given(userService.findByName("benoit")).willReturn(Optional.of(user));
+
+        //  Optional<User> ret=userService.findByName("benoit");
+
+        //    assertThat(ret.get(),is(user));
+
+        mockMvc.perform(get("/users/user/"))
+
+                .andExpect(status().is2xxSuccessful());
+    }
 
 }
 //https://thepracticaldeveloper.com/2017/07/31/guide-spring-boot-controller-tests/
