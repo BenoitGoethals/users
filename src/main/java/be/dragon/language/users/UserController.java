@@ -1,20 +1,16 @@
 package be.dragon.language.users;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -27,8 +23,7 @@ public class UserController {
     public static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
 
-
-    @RequestMapping(value = "/user/", method = RequestMethod.GET)
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
         List<User> users = userService.findAllUsers();
         if (users.isEmpty()) {
@@ -36,6 +31,19 @@ public class UserController {
             // You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<List<User>>(users, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/user/name/{name}", method = RequestMethod.GET)
+    public ResponseEntity<?> getUserByName(@PathVariable("name") String name) {
+        logger.info("Fetching User with name {}", name);
+        Optional<User> user = userService.findByName(name);
+        if (user == null) {
+            logger.error("User with id {} not found.", name);
+            return new ResponseEntity(new CustomErrorType("User with id " + name
+                    + " not found"), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<User>(user.get(), HttpStatus.OK);
     }
 
 

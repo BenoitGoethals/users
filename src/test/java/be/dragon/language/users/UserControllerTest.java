@@ -30,26 +30,57 @@ public class UserControllerTest {
     // shortened for clarity
 
     @Test
-    public void shouldReturnFullName() throws Exception {
+    public void shouldReturnUserById() throws Exception {
         Date date = new Date();
 
         User user = new User("benoit", "password", date, date, date, null);
+        user.setId(Long.valueOf(1));
 
-
-        given(userService.findByName("benoit")).willReturn(Optional.of(user));
+        //  given(userService.findByName("benoit")).willReturn(Optional.of(user));
+        given(userService.findById(1)).willReturn(user);
 
         //  Optional<User> ret=userService.findByName("benoit");
 
         //    assertThat(ret.get(),is(user));
 
-        mockMvc.perform(get("/users/1"))
+        mockMvc.perform(get("/users/user/1"))
 
                 .andExpect(status().is2xxSuccessful());
     }
 
 
     @Test
-    public void shouldReturnUser() throws Exception {
+    public void shouldReturnError() throws Exception {
+
+
+        mockMvc.perform(get("/users/user/2"))
+
+                .andExpect(status().is4xxClientError());
+    }
+
+    @Test
+    public void shouldReturnUserByName() throws Exception {
+        Date date = new Date();
+
+        User user = new User("benoit", "password", date, date, date, null);
+        user.setId(Long.valueOf(1));
+
+        //  given(userService.findByName("benoit")).willReturn(Optional.of(user));
+        given(userService.findByName("benoit")).willReturn(Optional.ofNullable(user));
+
+        //  Optional<User> ret=userService.findByName("benoit");
+
+        //    assertThat(ret.get(),is(user));
+
+        mockMvc.perform(get("/users/user/name/benoit"))
+
+                .andExpect(status().is2xxSuccessful());
+    }
+
+
+
+    @Test
+    public void shouldReturnAllUser() throws Exception {
         Date date = new Date();
 
         User user = new User("benoit", "password", date, date, date, null);
@@ -61,7 +92,7 @@ public class UserControllerTest {
 
         //    assertThat(ret.get(),is(user));
 
-        mockMvc.perform(get("/users/user/"))
+        mockMvc.perform(get("/users/all"))
 
                 .andExpect(status().is2xxSuccessful());
     }
