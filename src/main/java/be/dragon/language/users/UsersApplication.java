@@ -2,14 +2,8 @@ package be.dragon.language.users;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @SpringBootApplication
 public class UsersApplication {
@@ -22,8 +16,8 @@ public class UsersApplication {
 
 		SpringApplication.run(UsersApplication.class, args);
 	}
-
-	@Bean
+/*
+    @Bean
 	public CommandLineRunner demo(UserRepository repository) {
 		return (args) -> {
 			Date date=new Date();
@@ -35,4 +29,5 @@ public class UsersApplication {
 
 		};
 	}
+	*/
 }
