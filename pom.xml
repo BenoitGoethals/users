@@ -125,6 +125,15 @@
 				<version>3.8</version>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>3.3.0.603</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<mailingLists>
@@ -138,9 +147,9 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:svn:http://svn.wakaleo.com/hoteldatabase/</connection>
-		<developerConnection>scm:svn:http://svn.wakaleo.com/hoteldatabase/</developerConnection>
-		<url>http://svn.wakaleo.com/viewcvs.cgi/hoteldatabase/</url>
+		<connection>scm:git:https://github.com/BenoitGoethals/users.git</connection>
+		<developerConnection>scm:git:https://github.com/BenoitGoethals/users.git/</developerConnection>
+		<url>https://github.com/BenoitGoethals/users</url>
 	</scm>
 
 	<developers>
@@ -158,12 +167,12 @@
 	</developers>
 
 	<ciManagement>
-		<system>Continuum</system>
-		<url>http://integrationserver.wakaleo.com/continuum</url>
+		<system>Jenkins</system>
+		<url>http://78.21.247.187:8080/</url>
 		<notifiers>
 			<notifier>
 				<type>mail</type>
-				<address>duke@wakaleo.com</address>
+				<address>benoit.goethals@gmail.com</address>
 			</notifier>
 		</notifiers>
 	</ciManagement>
